@@ -26,7 +26,7 @@ func compress(string s: String) -> String {
         compressedString += "\(c)\(count)"
     }
     
-    return compressedString.count == s.count * 2 ? s : compressedString
+    return compressedString.count < s.count ? compressedString : s
 }
 
 var input = [
@@ -43,7 +43,7 @@ let output = input.map { compress(string: $0) }
 
 var expectedOutput = [
     "a2b1c5a3",
-    "a2o1a1o1a1o1a3",
+    "aaoaoaoaaa",
     "a1b2c3d4e5",
     "abcde",
     "abcd",
