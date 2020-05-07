@@ -8,24 +8,21 @@ class TreeNode<T> {
     }
 }
 
-func makeBST<ElementType>(from a: [ElementType]) -> TreeNode<ElementType> {
-    var visited: [Bool] = Array(repeating: false, count: a.count)
-    
-    func bst(_ l: Int, _ r: Int) -> TreeNode<ElementType>? {
-        guard l < r else { 
-            return visited[l] ? nil : TreeNode(a[l])
+func makeMinimalBST<ElementType>(from array: [ElementType]) -> TreeNode<ElementType>? {
+    func makeMinimalBST(_ l: Int, _ r: Int) -> TreeNode<ElementType>? {
+        guard l <= r else {  
+            return nil 
         }
         
-        let m = l + (r - l) / 2
-        visited[m] = true
-        let root = TreeNode(a[m])
-        root.leftNode = bst(l, m) 
-        root.rightNode = bst(m + 1, r)
+        let m = (l + r) / 2
+        let root = TreeNode(array[m])
+        root.leftNode = makeMinimalBST(l, m - 1) 
+        root.rightNode = makeMinimalBST(m + 1, r)
         
         return root
     }
     
-    return bst(0, a.count - 1)!
+    return makeMinimalBST(0, array.count - 1)
 }
 
 func bfs<T>(_ root: TreeNode<T>) -> [[T]] {
@@ -59,7 +56,7 @@ let expectedOutput = [
     [[8], [4, 12], [2, 6, 10, 14], [1, 3, 5, 7, 9, 11, 13, 15]]
 ]
 
-let output = input.map { bfs(makeBST(from: $0)) }
+let output = input.map { bfs(makeMinimalBST(from: $0)!) }
 
 let result = output == expectedOutput ? "Accepted" : "Failed"
 print(result)
