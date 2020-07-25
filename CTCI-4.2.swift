@@ -1,62 +1,38 @@
-class TreeNode<T> {
-    let value: T
-    var leftNode: TreeNode?
-    var rightNode: TreeNode?
-    
-    init(_ value: T) {
-        self.value = value
-    }
-}
+// Convert Sorted Array to Binary Search Tree with minimal height.
+//
+// https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
 
-func makeMinimalBST<ElementType>(from array: [ElementType]) -> TreeNode<ElementType>? {
-    func makeMinimalBST(_ l: Int, _ r: Int) -> TreeNode<ElementType>? {
-        guard l <= r else {  
-            return nil 
-        }
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public var val: Int
+ *     public var left: TreeNode?
+ *     public var right: TreeNode?
+ *     public init() { self.val = 0; self.left = nil; self.right = nil; }
+ *     public init(_ val: Int) { self.val = val; self.left = nil; self.right = nil; }
+ *     public init(_ val: Int, _ left: TreeNode?, _ right: TreeNode?) {
+ *         self.val = val
+ *         self.left = left
+ *         self.right = right
+ *     }
+ * }
+ */
+
+class Solution {
+    func sortedArrayToBST(_ nums: [Int]) -> TreeNode? {
+        guard !nums.isEmpty else { return nil }
         
-        let m = (l + r) / 2
-        let root = TreeNode(array[m])
-        root.leftNode = makeMinimalBST(l, m - 1) 
-        root.rightNode = makeMinimalBST(m + 1, r)
+        return bst(from: nums, start: 0, end: nums.count - 1)
+    }
+    
+    private func bst(from arr: [Int], start: Int, end: Int) -> TreeNode? {
+        guard start <= end else { return nil }
+        
+        let mid = (start + end) / 2
+        let root = TreeNode(arr[mid])
+        root.left = bst(from: arr, start: start, end: mid - 1)
+        root.right = bst(from: arr, start: mid + 1, end: end)
         
         return root
     }
-    
-    return makeMinimalBST(0, array.count - 1)
 }
-
-func bfs<T>(_ root: TreeNode<T>) -> [[T]] {
-    var queue = [root]
-    var result = [[T]]()
-    
-    while !queue.isEmpty {
-        var array = [T]()
-        for _ in 0 ..< queue.count {
-            let node = queue.removeFirst()
-            if let leftNode = node.leftNode { queue.append(leftNode) }
-            if let rightNode = node.rightNode { queue.append(rightNode) }
-            
-           array.append(node.value)
-        }
-        result.append(array)
-    }
-    
-    return result
-}
-
-let input = [
-    (1...1).map { $0 },
-    (1...4).map { $0 },
-    (1...15).map { $0 }
-]
-
-let expectedOutput = [
-    [[1]],
-    [[2], [1, 3], [4]],
-    [[8], [4, 12], [2, 6, 10, 14], [1, 3, 5, 7, 9, 11, 13, 15]]
-]
-
-let output = input.map { bfs(makeMinimalBST(from: $0)!) }
-
-let result = output == expectedOutput ? "Accepted" : "Failed"
-print(result)
