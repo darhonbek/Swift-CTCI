@@ -74,10 +74,21 @@ func multiplyNumbersUsingDispatchQueue(_ arr: [Int]) -> [Int] {
     return answer
 }
 
+// Solution #3 - using DispatchQueue.concurrentPerform()
+
+func multiplyNumbersConcurrently(_ arr: [Int]) -> [Int] {
+    var answer: [Int] = Array(repeating: 0, count: arr.count)
+    DispatchQueue.concurrentPerform(iterations: arr.count) { answer[$0] = multiplyByTwo(arr[$0]) }
+    return answer
+}
+
+
+
 let input = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 let expectedOutput = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
 
 //let output = multiplyNumbers(input)
-let output = multiplyNumbersUsingDispatchQueue(input)
+//let output = multiplyNumbersUsingDispatchQueue(input)
+let output = multiplyNumbersConcurrently(input)
 
 print(output == expectedOutput ? "Accepted" : "Failed")
