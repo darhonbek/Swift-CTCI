@@ -1,5 +1,5 @@
 # algorithms_notebook
-Notebook for coding problems.
+Swift language solutions for "Cracking the Coding Interview" problems.
 <br>
 Based on:
 - "Introduction to Algorithms, 3rd edition", by T. Cormen, C. Leiserson, R. Rivest, C. Stein.
