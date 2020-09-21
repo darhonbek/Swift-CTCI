@@ -1,4 +1,4 @@
-# algorithms_notebook
+# Swift CTCI
 Swift language solutions for "Cracking the Coding Interview" problems.
 <br>
 Based on:
