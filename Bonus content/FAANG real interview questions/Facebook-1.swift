@@ -4,7 +4,7 @@ func nearestCommonView(a: UIView, b: UIView) -> UIView? {
     var containingView: UIView?
     let aSuperviews = a.getSuperviews()
 
-    b.forEachSuperview {view, shouldBreak in
+    b.forEachSuperview { view, shouldBreak in
         if aSuperviews.contains(view) {
             containingView = view
             shouldBreak = true

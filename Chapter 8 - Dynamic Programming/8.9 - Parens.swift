@@ -29,22 +29,26 @@ class Solution {
         guard n > 0 else { return [] }
         
         var combinations: [String] = []
-        generateCombinations(open: n - 1, closed: n, path: "(", array: &combinations)
+        var path: [Character] = Array(repeating: Character("."), count: n*2)
+        path[0] = "("
+        generateCombinations(open: n - 1, closed: n, path: &path, index: 1, array: &combinations)
         return combinations
     }
     
-    private func generateCombinations(open: Int, closed: Int, path: String, array: inout [String]) {
+    private func generateCombinations(open: Int, closed: Int, path: inout [Character], index: Int, array: inout [String]) {
         guard open > 0 || closed > 0 else {
-            array.append(path)
+            array.append(String(path))
             return
         }
         
         if open > 0 {
-            generateCombinations(open: open - 1, closed: closed, path: path + "(", array: &array)
+            path[index] = "("
+            generateCombinations(open: open - 1, closed: closed, path: &path, index: index + 1, array: &array)
         }
         
         if closed > open {
-            generateCombinations(open: open, closed: closed - 1, path: path + ")", array: &array)
+            path[index] = ")"
+            generateCombinations(open: open, closed: closed - 1, path: &path, index: index + 1, array: &array)
         }
     }
 }
