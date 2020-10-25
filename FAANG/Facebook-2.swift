@@ -1,3 +1,8 @@
+/**
+    Similar to the problem below, but need to return paths:
+    https://leetcode.com/problems/unique-paths/
+*/
+
 func pathsToCell(_ r: Int, _ c: Int, _ path: String = "") -> [String] {
     guard r > 0, c > 0 else { return [] }
     

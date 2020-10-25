@@ -1,5 +1,9 @@
 import UIKit
 
+/**
+ Implement UIView recursiveDescription() method.
+*/
+
 extension UIView {
     var recursiveDescription: String {
         var description = ""

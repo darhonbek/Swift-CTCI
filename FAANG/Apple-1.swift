@@ -1,5 +1,14 @@
 import Foundation
 
+/**
+    Given slow method multiplyByTwo(n:) that takes number and returns it multiplied by two.
+    
+    Given another method multiplyNumbers(arr:) that takes an array of numbers,
+    calls method above for each number and stores result to the array.
+
+    Modify multiplyNumbers(arr:) to process numbers concurrently. Result should be stored in order.
+*/
+
 func multiplyByTwo(_ n: Int) -> Int {
     sleep(UInt32.random(in: 0...3))
     print(n*2)

@@ -1,3 +1,8 @@
+/**
+    Find all anagrams in string. Implement is as an extension to String.
+    https://leetcode.com/problems/find-all-anagrams-in-a-string/
+*/
+
 extension String {
     func firstAnagramedIndex(of s: String) -> Int {
         guard s.count <= count else { return -1 }

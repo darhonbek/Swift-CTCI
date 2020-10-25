@@ -1,5 +1,11 @@
 import UIKit
 
+/**
+    Given views A and B, find nearest common view containing both views.
+    Similar to this problem:
+    https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
+*/
+
 func nearestCommonView(a: UIView, b: UIView) -> UIView? {
     var containingView: UIView?
     let aSuperviews = a.getSuperviews()
